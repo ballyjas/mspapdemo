@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Order Form</title>
+</head>
+<body >
+    <h1>Pizza Order Form</h1>
+    <form id="pizzaOrderForm">
+        <label for="pizzaSize">Pizza Size:</label>
+        <select id="pizzaSize" name="pizzaSize">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+        </select><br>
+
+        <label for="topping">Topping:</label>
+        <input type="text" id="topping" name="topping"><br>
+
+        <label for="customerName">Your Name:</label>
+        <input type="text" id="customerName" name="customerName"><br>
+
+        <input type="button" value="Place Order" onclick="submitOrder()">
+    </form>
+
+    <script>
+        function submitOrder() {
+            var size = document.getElementById("pizzaSize").value;
+            var topping = document.getElementById("topping").value;
+            var customerName = document.getElementById("customerName").value;
+
+            // Send the order data to the server for processing
+            fetch('/submitOrder', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ size, topping, customerName }),
+            });
+            alert('Order saved!');
+        }
+    </script>
+</body>
+</html>
